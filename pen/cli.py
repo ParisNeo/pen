@@ -473,43 +473,6 @@ class _StatusLine(Widget):
         if right_x > self.x + 1 + _visible_width(left_rendered) + 2:
             buffer.draw_text(right_x, self.y, right_rendered, self.style, max_width=right_w)
 
-
-# ---------------------------------------------------------------- sample text
-SAMPLE = (
-    "# Welcome to pen — a tiny terminal text editor with syntax highlighting.\n"
-    "#\n"
-    "# Edit this sample, then press Ctrl+S to save.\n"
-    "\n"
-    "import math\n"
-    "\n"
-    "\n"
-    "def fibonacci(n: int) -> int:\n"
-    "    a, b = 0, 1\n"
-    "    for _ in range(n):\n"
-    "        a, b = b, a + b\n"
-    "    return a\n"
-    "\n"
-    "\n"
-    "def show_sequence(count: int = 10) -> None:\n"
-    "    for i in range(count):\n"
-    "        value = fibonacci(i)\n"
-    "        print(f'fib({i}) = {value}')\n"
-    "\n"
-    "\n"
-    "# Approximate pi using the Basel series.\n"
-    "def approximate_pi(terms: int = 10_000) -> float:\n"
-    "    total = 0.0\n"
-    "    for k in range(1, terms + 1):\n"
-    "        total += 1.0 / (k * k)\n"
-    "    return math.sqrt(6.0 * total)\n"
-    "\n"
-    "\n"
-    "if __name__ == '__main__':\n"
-    "    show_sequence(10)\n"
-    "    print(f'pi ~= {approximate_pi():.6f}')\n"
-)
-
-
 # ---------------------------------------------------------------------- main
 def _parse_path(args: List[str]) -> Tuple[Optional[str], Optional[int]]:
     """Return ``(path, exit_code)``. ``exit_code`` is set when the CLI
@@ -535,7 +498,7 @@ def _parse_path(args: List[str]) -> Tuple[Optional[str], Optional[int]]:
 def _load_editor(path: Optional[str]) -> Tuple[Optional[TextEditor], Optional[int]]:
     """Return ``(editor, exit_code)``. ``editor`` is ``None`` on failure."""
     if path is None:
-        return TextEditor(lines=SAMPLE.rstrip("\n").split("\n")), None
+        return TextEditor(), None
     if os.path.exists(path):
         try:
             return TextEditor.open_file(path), None

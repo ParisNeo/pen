@@ -18,7 +18,7 @@ pip install -e .
 ## Usage
 
 ```bash
-pen                     # start with the welcome sample
+pen                     # start with an empty untitled document
 pen path/to/file.py     # open an existing file, or create a new one
 ```
 
